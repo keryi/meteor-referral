@@ -4,8 +4,12 @@ Meteor.user = function() {
 
 Tinytest.add('Refer by email', function(test) {
   Referrals.remove({});
+  ReferralIds.remove({});
   var referrer = Meteor.users.findOne();
   var email = faker.internet.email();
+  ReferralIds.insert({
+    userId: referrer._id
+  });
   Meteor.call('referByEmail', email);
   test.equal(Referrals.find().count(), 1);
   var referral = Referrals.findOne();
@@ -27,18 +31,24 @@ Tinytest.add('Register referee by email referral', function(test) {
   };
   Meteor.call('registerReferee', options, referralId);
   var referral = Referrals.findOne({ email: email });
-  test.equal(referral.refereeId, refereeId);
+  var referee = Meteor.users.findOne({ _id: referral.refereeId });
+  test.equal(referral.refereeId, referee._id);
 });
 
 Tinytest.add('Register referee by referral link', function(test) {
-  
+  // TODO
 });
 
 Tinytest.add('Generate referral Id', function(test) {
-  Meteor.call('generateReferralId', '1');
-  var referralId = ReferralIds.findOne({ userId: '1' });
-  test.isNotNulL(referralId);
-  test.equal(referralId.userId, '1');
+  Referrals.remove({});
+  ReferralIds.remove({});
+  var userId = _.random(99999999).toString();
+  Meteor.call('generateReferralIdFor', userId);
+  var referralId = ReferralIds.findOne({ userId: userId });
+  test.isNotNull(referralId);
+  test.equal(referralId.userId, userId);
 
-  test.throw(Meteor.call('generateReferralId', '1'));
+  test.throws(function() {
+    Meteor.call('generateReferralIdFor', userId)
+  });
 });

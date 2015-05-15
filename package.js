@@ -18,14 +18,14 @@ Package.onUse(function(api) {
   api.use('iron:router@1.0.7')
   api.use('aldeed:collection2@2.3.3');
   api.use('aldeed:simple-schema@1.3.2');
-  api.addFiles('config.coffee', 'server');
-  api.addFiles('referral-controller.coffee', both);
-  api.addFiles('referral-signup.html', 'client');
-  api.addFiles('referral-signup.coffee', 'client');
-  api.addFiles('referrals.coffee', both);
-  api.addFiles('referralIds.coffee', both);
-  api.addFiles('publications.coffee', 'server');
-  api.addFiles('server.coffee', 'server');
+  api.addFiles('server/config.coffee', 'server');
+  api.addFiles('lib/referral-controller.coffee', both);
+  api.addFiles('client/referral-signup.html', 'client');
+  api.addFiles('client/referral-signup.coffee', 'client');
+  api.addFiles('lib/referrals.coffee', both);
+  api.addFiles('lib/referralIds.coffee', both);
+  api.addFiles('server/publications.coffee', 'server');
+  api.addFiles('server/server.coffee', 'server');
 });
 
 Package.onTest(function(api) {
@@ -34,7 +34,8 @@ Package.onTest(function(api) {
   api.use('accounts-base');
   api.use('accounts-password');
   api.use('digilord:faker@1.0.3');
+  api.use('underscore');
   api.use('keryi:meteor-referral');
-  api.addFiles('test-data.coffee', 'server');
-  api.addFiles('meteor-referral-tests.js', 'server');
+  api.addFiles('tests/test-data.coffee', 'server');
+  api.addFiles('tests/meteor-referral-tests.js', 'server');
 });
