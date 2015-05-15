@@ -20,6 +20,7 @@ Package.onUse(function(api) {
   api.use('aldeed:simple-schema@1.3.2');
   api.addFiles('server/config.coffee', 'server');
   api.addFiles('lib/referral-controller.coffee', both);
+  api.addFiles('lib/errors.coffee', 'client');
   api.addFiles('client/referral-signup.html', 'client');
   api.addFiles('client/referral-signup.coffee', 'client');
   api.addFiles('lib/referrals.coffee', both);
