@@ -2,7 +2,7 @@ Package.describe({
   name: 'keryi:meteor-referral',
   version: '0.0.1',
   summary: 'A simple referral system for Meteor',
-  git: '',
+  git: 'https://github.com/keryi/meteor-referral.git',
   documentation: 'README.md'
 });
 
